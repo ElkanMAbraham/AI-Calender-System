@@ -1,1 +1,1 @@
-# AI OS
+# AI Operating Sytem
