@@ -1,1 +1,5 @@
-# AI Calendar System
+# Docket
+
+--- 
+
+Docket is an AI Powered Calendar App.
