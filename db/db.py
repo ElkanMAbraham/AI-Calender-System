@@ -2,12 +2,12 @@ import sqlite3
 import json
 from datetime import datetime
 
-DB_PATH = "calendar.db"
+DB_PATH = "db/docket.db"
 
 
 def get_conn():
     conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row 
+    conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
 
@@ -229,7 +229,7 @@ def get_ai_context() -> dict:
         "active_tasks": [dict(t) for t in active_tasks],
         "learned_patterns": [dict(p) for p in patterns],
         "overdue_tasks": [dict(o) for o in overdue],
-        "generated_at": datetime.now().isoformat()
+        "generated_at": datetime.now().isoformat(),
     }
 
 
@@ -241,10 +241,13 @@ def update_ai_patterns(task_id: int):
     conn = get_conn()
     c = conn.cursor()
 
-    task = c.execute("""
+    task = c.execute(
+        """
         SELECT ai_tags, difficulty, ai_estimated_hours, actual_hours
         FROM tasks WHERE id = ?
-    """, (task_id,)).fetchone()
+    """,
+        (task_id,),
+    ).fetchone()
 
     if not task or not task["actual_hours"]:
         conn.close()
@@ -253,31 +256,42 @@ def update_ai_patterns(task_id: int):
     tags = json.loads(task["ai_tags"] or "[]")
 
     for tag in tags:
-        existing = c.execute("""
+        existing = c.execute(
+            """
             SELECT id, observed_value, sample_size
             FROM ai_patterns
             WHERE pattern_type = 'task_duration' AND tag = ?
-        """, (tag,)).fetchone()
+        """,
+            (tag,),
+        ).fetchone()
 
         if existing:
             # Rolling average
             new_sample = existing["sample_size"] + 1
-            new_avg = ((existing["observed_value"] * existing["sample_size"])
-                       + task["actual_hours"]) / new_sample
+            new_avg = (
+                (existing["observed_value"] * existing["sample_size"])
+                + task["actual_hours"]
+            ) / new_sample
             confidence = min(0.95, new_sample / 10)  # caps at 0.95 after 10 samples
 
-            c.execute("""
+            c.execute(
+                """
                 UPDATE ai_patterns
                 SET observed_value = ?, sample_size = ?, confidence = ?,
                     updated_at = datetime('now')
                 WHERE id = ?
-            """, (new_avg, new_sample, confidence, existing["id"]))
+            """,
+                (new_avg, new_sample, confidence, existing["id"]),
+            )
         else:
-            c.execute("""
+            c.execute(
+                """
                 INSERT INTO ai_patterns
                     (pattern_type, tag, observed_value, sample_size, confidence)
                 VALUES ('task_duration', ?, ?, 1, 0.1)
-            """, (tag, task["actual_hours"]))
+            """,
+                (tag, task["actual_hours"]),
+            )
 
     conn.commit()
     conn.close()
