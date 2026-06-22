@@ -1,39 +1,39 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri App</title>
-    <script type="module" src="/main.js" defer></script>
-  </head>
 
-  <body>
-    <main class="container">
-      <h1>Welcome to Tauri</h1>
+    <head>
+        <meta charset="UTF-8" />
+        
+        <link rel="stylesheet" href="styles/main.css" />
+        <link rel="stylesheet" href="styles/components.css" />
 
-      <div class="row">
-        <a href="https://tauri.app" target="_blank">
-          <img src="/assets/tauri.svg" class="logo tauri" alt="Tauri logo" />
-        </a>
-        <a
-          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-          target="_blank"
-        >
-          <img
-            src="/assets/javascript.svg"
-            class="logo vanilla"
-            alt="JavaScript logo"
-          />
-        </a>
-      </div>
-      <p>Click on the Tauri logo to learn more about the framework</p>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Docket</title>
+        <script type="module" src="/main.js" defer></script>
+    </head>
 
-      <form class="row" id="greet-form">
-        <input id="greet-input" placeholder="Enter a name..." />
-        <button type="submit">Greet</button>
-      </form>
-      <p id="greet-msg"></p>
-    </main>
-  </body>
+
+    <body>
+        <main class="container">
+            <div class="card" data-size="xl">
+                <h1>Heading 1</h1>
+                <p>This is card-xl</p>
+            </div>
+
+            <div class="card" data-size="lg">
+                <h2>Heading 2</h2>
+                <p>This is card-lg</p>
+            </div>
+
+            <div class="card" data-size="md">
+                <h3>Heading 3</h3>
+                <p>This is card-md</p>
+            </div>
+            
+            <div class="card" data-size="sm">
+                <h4>Heading 4</h4>
+                <p>This is card-sm</p>
+            </div>
+        </main>
+    </body>
 </html>
