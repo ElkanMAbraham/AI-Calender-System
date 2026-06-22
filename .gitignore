@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 
-src-tauri/target/
+/target/
 src-tauri/binaries/*
 !src-tauri/binaries/.gitkeep
 
