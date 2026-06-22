@@ -2,7 +2,7 @@ import sqlite3
 import json
 from datetime import datetime
 
-DB_PATH = "calendar.db"
+DB_PATH = "docket.db"
 
 
 def get_conn():
