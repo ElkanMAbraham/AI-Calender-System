@@ -1,0 +1,48 @@
+/* 
+========================
+
+Card Components
+
+========================
+*/
+
+.card {
+    background: var(--color-background-secondary);
+	border: var(--border-width-regular) solid var(--color-border-secondary);
+}
+
+.card[data-size="sm"] {
+    padding: var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-text-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.card[data-size="md"] {
+    padding: var(--space-md);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-text-md);
+    box-shadow: var(--shadow-md);
+}
+
+.card[data-size="lg"] {
+    padding: var(--space-lg);
+    border-radius: var(--border-radius-lg);
+    font-size: var(--font-text-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.card[data-size="xl"] {
+    padding: var(--space-xl);
+    border-radius: var(--border-radius-xl);
+    font-size: var(--font-text-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+/* 
+========================
+
+Buttons Components
+
+========================
+*/
