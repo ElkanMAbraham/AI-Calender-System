@@ -130,6 +130,11 @@
 	--z-overlay: 300;
 	--z-modal: 400;
 	--z-toast: 500;
+
+	/* ---------- Transitions ---------- */
+	--speed-fast: 200ms;
+	--speed-base: 250ms;
+	--speed-slow: 350ms;
 }
 
 /*
@@ -157,8 +162,7 @@ html {
 body {
 	background-color: var(--color-background-primary);
 	color: var(--color-text-primary);
-	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-	font-size: var(--font-text-md);
+	font-family: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 	font-weight: var(--font-weight-normal);
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;

@@ -1,3 +1,92 @@
+/*
+========================
+
+Navigation bar
+
+========================
+*/
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-background-tertiary);
+    padding: var(--space-2xs);
+    border-bottom: var(--border-width-regular) solid var(--color-border-primary);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    column-gap: var(--space-xs);
+    padding-inline: var(--space-xs);
+    font-size: var(--font-text-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+}
+
+.nav-brand-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--font-header-lg);
+    height: var(--font-header-lg);
+    border-radius: var(--border-radius-xs);
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+}
+
+.nav-icon-inline {
+    font-size: var(--font-text-lg);
+}
+
+.nav-icon-btn {
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-tertiary);
+    background: transparent;
+}
+.nav-icon-btn:hover, .nav-segment-item:hover {
+    color: var(--color-text-secondary);
+    background: var(--color-background-ghost);
+    transition: color var(--speed-base) ease, background var(--speed-base) ease;
+}
+
+.nav-segment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: var(--space-3xs);
+    background: var(--color-background-primary);
+    border-radius: var(--border-radius-full);
+    padding: var(--space-3xs) var(--space-xs);
+}
+
+.nav-segment-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-sm);
+    border-radius: var(--border-radius-full);
+    color: var(--color-text-tertiary);
+    font-size: var(--font-text-md);
+    font-weight: var(--font-weight-medium);
+    background: transparent;
+}
+.nav-segment-item.is-active {
+    background: var(--color-background-frame);
+    color: var(--color-text-inverted);
+}
+
+.nav-side {
+    display: flex;
+    align-items: center;
+    column-gap: var(--space-xs);
+}
+
 /* 
 ========================
 
@@ -42,7 +131,18 @@ Card Components
 /* 
 ========================
 
-Buttons Components
+Other Classes
 
 ========================
 */
+
+button {
+    display: flex;
+    flex-direction: row;
+    background: none;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
