@@ -40,6 +40,7 @@ nav {
 }
 
 .nav-icon-btn {
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 34px;
@@ -96,7 +97,7 @@ Card Components
 */
 
 .card {
-    background: var(--color-background-secondary);
+    background: var(--color-background-primary);
 	border: var(--border-width-regular) solid var(--color-border-secondary);
 }
 
@@ -131,18 +132,215 @@ Card Components
 /* 
 ========================
 
-Other Classes
+Button Classes
 
 ========================
 */
 
-button {
-    display: flex;
-    flex-direction: row;
-    background: none;
-    border: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
+/* 
+=========================
+Button System - All Variants
+=========================
+Uses custom attributes [data-btn-variant] for condensed, DRY styling
+Supports: primary, secondary, info, success, danger, warning, ghost
+*/
+
+/* ===== Base Button Styles ===== */
+[data-btn] {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-xs);
+	padding: var(--space-sm) var(--space-md);
+	font-size: var(--font-text-md);
+	font-weight: var(--font-weight-medium);
+	border-radius: var(--border-radius-md);
+	border: var(--border-width-regular) solid;
+	cursor: pointer;
+	transition: all var(--speed-base);
+	text-decoration: none;
+	white-space: nowrap;
+	user-select: none;
+	-webkit-font-smoothing: antialiased;
 }
+
+/* ===== Variant Definitions ===== */
+
+/* Primary */
+[data-btn="primary"] {
+	background-color: var(--button-primary-bg);
+	color: var(--button-primary-text);
+	border-color: var(--button-primary-border);
+}
+
+[data-btn="primary"]:hover:not(:disabled) {
+	background-color: var(--button-primary-hover-bg);
+	border-color: var(--button-primary-hover-border);
+	box-shadow: var(--shadow-sm);
+}
+
+[data-btn="primary"]:focus-visible {
+	outline: 2px solid var(--color-ring-primary);
+	outline-offset: 2px;
+}
+
+/* Secondary */
+[data-btn="secondary"] {
+	background-color: var(--button-secondary-bg);
+	color: var(--button-secondary-text);
+	border-color: var(--button-secondary-border);
+}
+
+[data-btn="secondary"]:hover:not(:disabled) {
+	background-color: var(--button-secondary-hover-bg);
+	border-color: var(--button-secondary-hover-border);
+	box-shadow: var(--shadow-sm);
+}
+
+[data-btn="secondary"]:focus-visible {
+	outline: 2px solid var(--color-ring-secondary);
+	outline-offset: 2px;
+}
+
+/* Info */
+[data-btn="info"] {
+	background-color: var(--button-info-bg);
+	color: var(--button-info-text);
+	border-color: var(--button-info-border);
+}
+
+[data-btn="info"]:hover:not(:disabled) {
+	background-color: var(--button-info-hover-bg);
+	border-color: var(--button-info-hover-border);
+	box-shadow: var(--shadow-sm);
+}
+
+[data-btn="info"]:focus-visible {
+	outline: 2px solid var(--color-ring-info);
+	outline-offset: 2px;
+}
+
+/* Success */
+[data-btn="success"] {
+	background-color: var(--button-success-bg);
+	color: var(--button-success-text);
+	border-color: var(--button-success-border);
+}
+
+[data-btn="success"]:hover:not(:disabled) {
+	background-color: var(--button-success-hover-bg);
+	border-color: var(--button-success-hover-border);
+	box-shadow: var(--shadow-sm);
+}
+
+[data-btn="success"]:focus-visible {
+	outline: 2px solid var(--color-ring-success);
+	outline-offset: 2px;
+}
+
+/* Danger */
+[data-btn="danger"] {
+	background-color: var(--button-danger-bg);
+	color: var(--button-danger-text);
+	border-color: var(--button-danger-border);
+}
+
+[data-btn="danger"]:hover:not(:disabled) {
+	background-color: var(--button-danger-hover-bg);
+	border-color: var(--button-danger-hover-border);
+	box-shadow: var(--shadow-sm);
+}
+
+[data-btn="danger"]:focus-visible {
+	outline: 2px solid var(--color-ring-danger);
+	outline-offset: 2px;
+}
+
+/* Warning */
+[data-btn="warning"] {
+	background-color: var(--button-warning-bg);
+	color: var(--button-warning-text);
+	border-color: var(--button-warning-border);
+}
+
+[data-btn="warning"]:hover:not(:disabled) {
+	background-color: var(--button-warning-hover-bg);
+	border-color: var(--button-warning-hover-border);
+	box-shadow: var(--shadow-sm);
+}
+
+[data-btn="warning"]:focus-visible {
+	outline: 2px solid var(--color-ring-warning);
+	outline-offset: 2px;
+}
+
+/* Ghost */
+[data-btn="ghost"] {
+	background-color: var(--button-ghost-bg);
+	color: var(--button-ghost-text);
+	border-color: var(--button-ghost-border);
+}
+
+[data-btn="ghost"]:hover:not(:disabled) {
+	background-color: var(--button-ghost-hover-bg);
+	border-color: var(--button-ghost-hover-border);
+	box-shadow: var(--shadow-sm);
+}
+
+[data-btn="ghost"]:focus-visible {
+	outline: 2px solid var(--color-ring-secondary);
+	outline-offset: 2px;
+}
+
+/* ===== Shared States ===== */
+
+/* Active/pressed state (all variants) */
+[data-btn]:active:not(:disabled) {
+	transform: scale(0.98);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Disabled state (all variants) */
+[data-btn]:disabled {
+	background-color: var(--button-disabled-bg);
+	color: var(--button-disabled-text);
+	border-color: var(--button-disabled-border);
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* Loading state (all variants) */
+[data-btn].is-loading {
+	pointer-events: none;
+	opacity: 0.8;
+}
+
+/* ===== Size Modifiers ===== */
+
+[data-btn][data-size="sm"] {
+	padding: var(--space-xs) var(--space-sm);
+	font-size: var(--font-text-sm);
+}
+
+[data-btn][data-size="lg"] {
+	padding: var(--space-md) var(--space-lg);
+	font-size: var(--font-text-lg);
+}
+
+/* ===== Width Modifiers ===== */
+
+[data-btn][data-width="full"] {
+	width: 100%;
+}
+
+[data-btn][data-width="auto"] {
+	width: auto;
+}
+
+/* 
+========================
+
+Other Classes
+
+========================
+*/
