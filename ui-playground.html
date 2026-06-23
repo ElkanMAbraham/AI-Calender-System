@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="frontend/styles/main.css" />
+    <link rel="stylesheet" href="frontend/styles/components.css" />
     
-    <script type="module" src="/main.js" defer></script>
+    <script type="module" src="frontend/main.js" defer></script>
 </head>
 <body>
     <nav>
@@ -30,7 +30,7 @@
             <h4>Docket</h4>
         </div>
         <div class="nav-segment">
-            <button class="nav-segment-item is-active">
+            <a class="nav-segment-item is-active">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-layout-dashboard">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
@@ -39,8 +39,8 @@
                     <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
                 </svg>  
                 Home
-            </button>
-            <button class="nav-segment-item">
+            </a>
+            <a class="nav-segment-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12" />
@@ -52,32 +52,30 @@
                     <path d="M16 14v4" />
                 </svg>          
                 Calendar
-            </button>
-            <button class="nav-segment-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-list-check">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M3.5 5.5l1.5 1.5l2.5 -2.5" />
-                <path d="M3.5 11.5l1.5 1.5l2.5 -2.5" />
-                <path d="M3.5 17.5l1.5 1.5l2.5 -2.5" />
-                <path d="M11 6l9 0" />
-                <path d="M11 12l9 0" />
-                <path d="M11 18l9 0" />
-            </svg>
-            Tasks
-            </button>
+            </a>
+            <a class="nav-segment-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-list-check">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3.5 5.5l1.5 1.5l2.5 -2.5" />
+                    <path d="M3.5 11.5l1.5 1.5l2.5 -2.5" />
+                    <path d="M3.5 17.5l1.5 1.5l2.5 -2.5" />
+                    <path d="M11 6l9 0" />
+                    <path d="M11 12l9 0" />
+                    <path d="M11 18l9 0" />
+                </svg>
+                Tasks
+            </a>
         </div>
         <div class="nav-side">
-            <button class="nav-icon-btn" aria-label="Settings">
+            <a class="nav-icon-btn" aria-label="Settings">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065" />
                     <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                 </svg>
-            </button>
+            </a>
         </div>
     </nav>
-
-
 
     <main class="container">    
         <div class="card" data-size="xl">
@@ -90,6 +88,62 @@
         </div>
 
         <div class="card" data-size="md">
+            <!-- PRIMARY BUTTONS -->
+            <button data-btn="primary">Save Changes</button>
+            <button data-btn="primary" data-size="sm">Small Primary</button>
+            <button data-btn="primary" data-size="lg">Large Primary</button>
+            <button data-btn="primary" data-width="full">Full Width Primary</button>
+            <button data-btn="primary" disabled>Disabled Primary</button>
+            
+            <!-- SECONDARY BUTTONS -->
+            <button data-btn="secondary">Cancel</button>
+            <button data-btn="secondary" data-size="lg">Large Secondary</button>
+            
+            <!-- INFO BUTTONS (Primary CTA) -->
+            <button data-btn="info">Create New</button>
+            <button data-btn="info" data-size="sm">Small Info</button>
+            <button data-btn="info" data-size="lg">Large Info</button>
+            <button data-btn="info" data-width="full">Full Width Info</button>
+            <button data-btn="info" disabled>Disabled Info</button>
+            
+            <!-- SUCCESS BUTTONS -->
+            <button data-btn="success">Confirm</button>
+            <button data-btn="success" data-size="lg">Large Success</button>
+            
+            <!-- DANGER BUTTONS -->
+            <button data-btn="danger">Delete</button>
+            <button data-btn="danger" data-size="lg">Large Danger</button>
+            
+            <!-- WARNING BUTTONS -->
+            <button data-btn="warning">Caution</button>
+            <button data-btn="warning" data-size="lg">Large Warning</button>
+            
+            <!-- GHOST BUTTONS (Secondary/Tertiary action) -->
+            <button data-btn="ghost">Skip</button>
+            <button data-btn="ghost" data-size="lg">Large Ghost</button>
+            
+            <!-- LINKS STYLED AS BUTTONS -->
+            <a href="/page" data-btn="info">Go to Page</a>
+            <a href="/create" data-btn="info" data-size="lg">Create Something</a>
+            
+            <!-- COMBINED EXAMPLE -->
+            <div class="row-end">
+                <button data-btn="ghost">Cancel</button>
+                <button data-btn="info" data-size="lg">Save Changes</button>
+            </div>
+            
+            <!-- WITH ICONS (using flexbox) -->
+            <button data-btn="info">
+                <svg class="icon" width="16" height="16" viewBox="0 0 16 16">
+                    <!-- Your icon SVG here -->
+                </svg>
+                Create
+            </button>
+            
+            <!-- LOADING STATE -->
+            <button data-btn="info" class="is-loading" disabled>
+                <span>Saving...</span>
+            </button>
             <h3>Heading 3</h3>
             <p>This is card-md</p>
         </div>
