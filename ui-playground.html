@@ -8,8 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
-     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-     <link rel="stylesheet" href="{{ url_for('static', filename='components.css') }}">
+     <link rel="stylesheet" href="frontend/static/main.css">
+     <link rel="stylesheet" href="frontend/static/components.css">
     
     <script type="module" src="frontend/main.js" defer></script>
 </head>
@@ -151,6 +151,243 @@
         <div class="card" data-size="sm">
             <h4>Heading 4</h4>
             <p>This is card-sm</p>
+        </div>
+
+        <div class="card" data-size="xl">
+            <h2>Text Inputs</h2>
+            <p>Single-line text inputs with all variants, sizes, and states. Uses the same <code>data-input</code> attribute pattern as your buttons.</p>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Variants</h3>
+            <p>Each variant mirrors a button variant. Use <code>primary</code> for default, <code>info</code> for a tinted accent, and the rest for semantic meaning.</p>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <input data-input="primary" placeholder="Primary input" />
+                <input data-input="secondary" placeholder="Secondary input" />
+                <input data-input="info" placeholder="Info input" value="jane@docket.app" />
+                <input data-input="success" placeholder="Success input" value="Email is valid" />
+                <input data-input="danger" placeholder="Danger input" value="Invalid email" />
+                <input data-input="warning" placeholder="Warning input" value="Check this field" />
+                <input data-input="ghost" placeholder="Ghost input" />
+            </div>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Sizes</h3>
+            <p>Three sizes that match the button scale (sm / md / lg).</p>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <input data-input="primary" data-size="sm" placeholder="Small input" />
+                <input data-input="primary" data-size="md" placeholder="Medium input (default)" />
+                <input data-input="primary" data-size="lg" placeholder="Large input" />
+            </div>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>States</h3>
+            <p>Default, focus (use Tab to test), disabled, readonly, and <code>[data-state]</code> validation states.</p>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <input data-input="primary" placeholder="Default state" />
+                <input data-input="primary" placeholder="Focused state" autofocus />
+                <input data-input="primary" placeholder="Disabled state" disabled />
+                <input data-input="primary" value="Read-only value" readonly />
+                <input data-input="primary" data-state="error" value="This field is required" />
+                <input data-input="primary" data-state="success" value="Looks good" />
+                <input data-input="primary" data-state="warning" value="Heads up" />
+            </div>
+        </div>
+
+        <div class="card" data-size="xl">
+            <h2>Textarea</h2>
+            <p>Multi-line text with the same variant and state system. Vertically resizable by default.</p>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Variants & sizes</h3>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <textarea data-input="primary" placeholder="Default textarea"></textarea>
+                <textarea data-input="primary" data-size="sm" placeholder="Small textarea"></textarea>
+                <textarea data-input="primary" data-size="lg" placeholder="Large textarea"></textarea>
+                <textarea data-input="info" placeholder="Info-tinted textarea for note-taking"></textarea>
+            </div>
+        </div>
+
+        <div class="card" data-size="xl">
+            <h2>Select, Radio, Checkbox & Switch</h2>
+            <p>Choice controls for event metadata, settings, and filters.</p>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Select</h3>
+            <p>Native <code>&lt;select&gt;</code> with a custom chevron. Disabled selects work too.</p>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <select data-input="primary">
+                    <option>Choose a calendar…</option>
+                    <option>Personal</option>
+                    <option>Work</option>
+                    <option>Team</option>
+                </select>
+                <select data-input="info">
+                    <option>Choose a category…</option>
+                    <option>Meeting</option>
+                    <option>Focus block</option>
+                    <option>Reminder</option>
+                </select>
+                <select data-input="primary" disabled>
+                    <option>Disabled select</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Radio & Checkbox</h3>
+            <div class="row" style="margin-top: var(--space-md); gap: var(--space-xl); align-items: flex-start;">
+                <div class="stack-xs">
+                    <p class="text-secondary text-sm font-semibold">Visibility</p>
+                    <label class="radio"><input type="radio" name="vis" checked /> Public</label>
+                    <label class="radio"><input type="radio" name="vis" /> Team only</label>
+                    <label class="radio"><input type="radio" name="vis" /> Private</label>
+                </div>
+                <div class="stack-xs">
+                    <p class="text-secondary text-sm font-semibold">Reminders</p>
+                    <label class="check"><input type="checkbox" checked /> 10 minutes before</label>
+                    <label class="check"><input type="checkbox" checked /> 1 hour before</label>
+                    <label class="check"><input type="checkbox" /> 1 day before</label>
+                    <label class="check"><input type="checkbox" disabled /> Custom (coming soon)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Switch</h3>
+            <p>Toggle for boolean settings.</p>
+            <div class="stack-xs" style="margin-top: var(--space-md);">
+                <label class="switch"><input type="checkbox" checked /> Show week numbers</label>
+                <label class="switch"><input type="checkbox" /> Start week on Monday</label>
+                <label class="switch"><input type="checkbox" /> Enable notifications</label>
+                <label class="switch"><input type="checkbox" disabled /> Sync across devices</label>
+            </div>
+        </div>
+
+        <div class="card" data-size="xl">
+            <h2>Form Fields</h2>
+            <p>Complete form-field pattern: label, input, helper text. Helper text color matches the input's validation state.</p>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Anatomy</h3>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <div class="field">
+                    <label class="field-label" for="ev-title">Event title<span class="required">*</span></label>
+                    <input id="ev-title" data-input="primary" placeholder="Quarterly planning" />
+                    <span class="field-helper">A short, recognizable name for the event.</span>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="ev-email">Email</label>
+                    <input id="ev-email" data-input="primary" data-state="error" value="not-an-email" />
+                    <span class="field-helper" data-state="error">That doesn't look like a valid email address.</span>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="ev-slug">Calendar URL</label>
+                    <input id="ev-slug" data-input="primary" data-state="success" value="docket.app/cal/jane" />
+                    <span class="field-helper" data-state="success">This URL is available.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" data-size="xl">
+            <h2>Inputs with Buttons</h2>
+            <p>How text inputs cooperate with your existing button system.</p>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Inline input + button</h3>
+            <p>A search field with a button sharing a single border. Common in modern apps (Linear, Notion).</p>
+            <div class="input-group" style="margin-top: var(--space-md);">
+                <span class="input-group-affix" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </span>
+                <input data-input="primary" placeholder="Search events…" />
+                <button data-btn="info">Search</button>
+            </div>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Input + icon button (clear)</h3>
+            <p>Use the <code>input-affix</code> pattern when you only need an icon, not a full button.</p>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <div class="input-affix">
+                    <span class="input-affix-affix input-affix-affix-start" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </span>
+                    <input data-input="primary" class="has-affix-start" placeholder="Find a meeting…" value="design review" />
+                    <button class="input-affix-affix input-affix-affix-end" data-btn="ghost" data-size="sm" aria-label="Clear search" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+
+                <div class="input-affix">
+                    <span class="input-affix-affix input-affix-affix-start" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </span>
+                    <input data-input="primary" class="has-affix-start" type="email" placeholder="you@example.com" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Segmented input group</h3>
+            <p>Multiple inputs sharing one border. Useful for time pickers, URL builders, or split inputs.</p>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <div class="input-group">
+                    <input data-input="primary" placeholder="14:00" />
+                    <span class="input-group-divider"></span>
+                    <input data-input="primary" placeholder="15:30" />
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-affix">docket.app/c/</span>
+                    <input data-input="primary" placeholder="your-team" />
+                    <button data-btn="primary">Copy link</button>
+                </div>
+
+                <div class="input-group" data-size="sm">
+                    <span class="input-group-affix">$</span>
+                    <input data-input="primary" placeholder="0.00" type="text" inputmode="decimal" />
+                    <span class="input-group-divider"></span>
+                    <span class="input-group-affix">USD</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" data-size="lg">
+            <h3>Form with action row</h3>
+            <p>A complete mini-form. Inputs above, action buttons right-aligned below &mdash; matches your existing <code>row-end</code> pattern.</p>
+            <div class="stack" style="margin-top: var(--space-md);">
+                <div class="field">
+                    <label class="field-label" for="new-title">New event</label>
+                    <input id="new-title" data-input="primary" placeholder="Title" />
+                </div>
+                <div class="row">
+                    <div class="field" style="flex: 1;">
+                        <label class="field-label" for="new-date">Date</label>
+                        <input id="new-date" data-input="primary" type="date" />
+                    </div>
+                    <div class="field" style="flex: 1;">
+                        <label class="field-label" for="new-time">Time</label>
+                        <input id="new-time" data-input="primary" type="time" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="field-label" for="new-desc">Description</label>
+                    <textarea id="new-desc" data-input="primary" placeholder="Add a description…"></textarea>
+                </div>
+                <div class="row-end">
+                    <button data-btn="ghost">Cancel</button>
+                    <button data-btn="info">Create event</button>
+                </div>
+            </div>
         </div>
     </main>
 </body>

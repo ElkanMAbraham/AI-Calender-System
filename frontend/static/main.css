@@ -74,6 +74,60 @@
 	--color-ring-warning: #f0a119;
 	--color-ring-disabled: #585050;
 
+	/* ---------- Button / Primary (Vibrant Red) ---------- */
+	--button-primary-bg: #8d3434;
+	--button-primary-text: #fefdfb;
+	--button-primary-border: #a63d3d;
+	--button-primary-hover-bg: #a63d3d;
+	--button-primary-hover-border: #b84d4d;
+
+	/* ---------- Button / Secondary (Warm Red Subtle) ---------- */
+	--button-secondary-bg: #b33d3d;
+	--button-secondary-text: #fefdfb;
+	--button-secondary-border: #8d3434;
+	--button-secondary-hover-bg: #c94a4a;
+	--button-secondary-hover-border: #a63d3d;
+
+	/* ---------- Button / Info (Default CTA) ---------- */
+	--button-info-bg: #1e3043;
+	--button-info-text: #60a8f0;
+	--button-info-border: #3170af;
+	--button-info-hover-bg: #2b4d63;
+	--button-info-hover-border: #4a8bc7;
+
+	/* ---------- Button / Success ---------- */
+	--button-success-bg: #1b3b27;
+	--button-success-text: #57e58b;
+	--button-success-border: #2f9254;
+	--button-success-hover-bg: #264a35;
+	--button-success-hover-border: #45b36e;
+
+	/* ---------- Button / Danger ---------- */
+	--button-danger-bg: #461e1b;
+	--button-danger-text: #f2685f;
+	--button-danger-border: #b5352c;
+	--button-danger-hover-bg: #5a2824;
+	--button-danger-hover-border: #d94733;
+
+	/* ---------- Button / Warning ---------- */
+	--button-warning-bg: #413116;
+	--button-warning-text: #fdbf53;
+	--button-warning-border: #b47f22;
+	--button-warning-hover-bg: #524220;
+	--button-warning-hover-border: #daa035;
+
+	/* ---------- Button / Ghost ---------- */
+	--button-ghost-bg: transparent;
+	--button-ghost-text: #b6afaf;
+	--button-ghost-border: #392d2d;
+	--button-ghost-hover-bg: #1f1919;
+	--button-ghost-hover-border: #493b3b;
+
+	/* ---------- Button / Disabled ---------- */
+	--button-disabled-bg: #332929;
+	--button-disabled-text: #635a5a;
+	--button-disabled-border: #504949;
+
 	/* ---------- Font Weight ---------- */
 	--font-weight-normal: 400;
 	--font-weight-medium: 500;
@@ -134,61 +188,6 @@
 	--speed-fast: 150ms;
 	--speed-base: 250ms;
 	--speed-slow: 350ms;
-
-	/* ---------- Button / Primary (Vibrant Red) ---------- */
-	--button-primary-bg: #8d3434;
-	--button-primary-text: #fefdfb;
-	--button-primary-border: #a63d3d;
-	--button-primary-hover-bg: #a63d3d;
-	--button-primary-hover-border: #b84d4d;
-
-	/* ---------- Button / Secondary (Warm Red Subtle) ---------- */
-	--button-secondary-bg: #b33d3d;
-	--button-secondary-text: #fefdfb;
-	--button-secondary-border: #8d3434;
-	--button-secondary-hover-bg: #c94a4a;
-	--button-secondary-hover-border: #a63d3d;
-
-	/* ---------- Button / Info (Default CTA) ---------- */
-	--button-info-bg: #1e3043;
-	--button-info-text: #60a8f0;
-	--button-info-border: #3170af;
-	--button-info-hover-bg: #2b4d63;
-	--button-info-hover-border: #4a8bc7;
-
-	/* ---------- Button / Success ---------- */
-	--button-success-bg: #1b3b27;
-	--button-success-text: #57e58b;
-	--button-success-border: #2f9254;
-	--button-success-hover-bg: #264a35;
-	--button-success-hover-border: #45b36e;
-
-	/* ---------- Button / Danger ---------- */
-	--button-danger-bg: #461e1b;
-	--button-danger-text: #f2685f;
-	--button-danger-border: #b5352c;
-	--button-danger-hover-bg: #5a2824;
-	--button-danger-hover-border: #d94733;
-
-	/* ---------- Button / Warning ---------- */
-	--button-warning-bg: #413116;
-	--button-warning-text: #fdbf53;
-	--button-warning-border: #b47f22;
-	--button-warning-hover-bg: #524220;
-	--button-warning-hover-border: #daa035;
-
-	/* ---------- Button / Ghost ---------- */
-	--button-ghost-bg: transparent;
-	--button-ghost-text: #b6afaf;
-	--button-ghost-border: #392d2d;
-	--button-ghost-hover-bg: #1f1919;
-	--button-ghost-hover-border: #493b3b;
-
-	/* ---------- Button / Disabled ---------- */
-	--button-disabled-bg: #332929;
-	--button-disabled-text: #635a5a;
-	--button-disabled-border: #504949;
-
 }
 
 /*
