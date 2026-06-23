@@ -1,0 +1,416 @@
+/*
+=========================================================================
+  MAIN.CSS
+  Load order: main.css → components.css
+
+  Contents:
+    1. Design Tokens (colors, type, border, spacing, elevation, z-index)
+    2. Reset
+    3. Base Typography
+    4. Layout Primitives (app shell, stacks/rows, container)
+    5. Utilities (position, display, text alignment, overflow, cursor)
+=========================================================================
+*/
+
+/*
+=========================
+1. Design Tokens
+=========================
+*/
+
+:root {
+	/* ---------- Background / Surface ---------- */
+	--color-background-primary: #191414;
+	--color-background-secondary: #251e1e;
+	--color-background-tertiary: #332929;
+	--color-background-frame: #f3f2f2;
+	--color-background-ghost: #1f1919;
+
+	/* ---------- Background / Accent ---------- */
+	--color-background-info: #1e3043;
+	--color-background-danger: #461e1b;
+	--color-background-success: #1b3b27;
+	--color-background-warning: #413116;
+	--color-background-flatten: #3e3232;
+
+	/* ---------- Text / Surface ---------- */
+	--color-text-primary: #f0efef;
+	--color-text-secondary: #b6afaf;
+	--color-text-tertiary: #857a7a;
+	--color-text-inverted: #1c1717;
+	--color-text-ghost: #5a5353;
+
+	/* ---------- Text / Accent ---------- */
+	--color-text-info: #60a8f0;
+	--color-text-danger: #f2685f;
+	--color-text-success: #57e58b;
+	--color-text-warning: #fdbf53;
+	--color-text-disabled: #635a5a;
+
+	/* ---------- Border / Surface ---------- */
+	--color-border-primary: #493b3b;
+	--color-border-secondary: #392d2d;
+	--color-border-tertiary: #2d2424;
+	--color-border-frame: #e2dfdf;
+	--color-border-ghost: #383838;
+
+	/* ---------- Border / Accent ---------- */
+	--color-border-info: #3170af;
+	--color-border-danger: #b5352c;
+	--color-border-success: #2f9254;
+	--color-border-warning: #b47f22;
+	--color-border-disabled: #504949;
+
+	/* ---------- Ring / Surface ---------- */
+	--color-ring-primary: #8d3434;
+	--color-ring-secondary: #6a3939;
+	--color-ring-tertiary: #4e3737;
+	--color-ring-frame: #e2dfdf;
+	--color-ring-warning: #de9517;
+
+	/* ---------- Ring / Accent ---------- */
+	--color-ring-info: #2b85de;
+	--color-ring-danger: #e23428;
+	--color-ring-success: #2bbf62;
+	--color-ring-warning: #f0a119;
+	--color-ring-disabled: #585050;
+
+	/* ---------- Font Weight ---------- */
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* ---------- Text Size ---------- */
+	--font-text-xs: 9px;
+	--font-text-sm: 11px;
+	--font-text-md: 14px;
+	--font-text-lg: 18px;
+
+	/* ---------- Header Size ---------- */
+	--font-header-xs: 14px;
+	--font-header-sm: 18px;
+	--font-header-md: 22px;
+	--font-header-lg: 27px;
+	--font-header-xl: 34px;
+	--font-header-2xl: 43px;
+	--font-header-3xl: 53px;
+
+	/* ---------- Border Width ---------- */
+	--border-width-regular: 1px;
+
+	/* ---------- Border Radius ---------- */
+	--border-radius-xs: 6px;
+	--border-radius-sm: 9px;
+	--border-radius-md: 12px;
+	--border-radius-lg: 18px;
+	--border-radius-xl: 24px;
+	--border-radius-full: 9999px;
+
+	/* ---------- Spacing ---------- */
+	--space-3xs: 2px;
+	--space-2xs: 4px;
+	--space-xs: 8px;
+	--space-sm: 12px;
+	--space-md: 16px;
+	--space-lg: 24px;
+	--space-xl: 32px;
+	--space-2xl: 48px;
+	--space-3xl: 64px;
+
+	/* ---------- Elevation ---------- */
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+	--shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+
+	/* ---------- Z-Index ---------- */
+	--z-base: 0;
+	--z-dropdown: 100;
+	--z-sticky: 200;
+	--z-overlay: 300;
+	--z-modal: 400;
+	--z-toast: 500;
+}
+
+/*
+=========================
+2. Reset
+=========================
+*/
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+}
+
+html {
+	font-size: var(--font-text-md);
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	background-color: var(--color-background-primary);
+	color: var(--color-text-primary);
+	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	font-size: var(--font-text-md);
+	font-weight: var(--font-weight-normal);
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+	color: inherit;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/*
+=========================
+3. Base Typography
+=========================
+*/
+
+h1 {
+	font-size: var(--font-header-3xl);
+	font-weight: var(--font-weight-bold);
+}
+
+h2 {
+	font-size: var(--font-header-2xl);
+	font-weight: var(--font-weight-bold);
+}
+
+h3 {
+	font-size: var(--font-header-xl);
+	font-weight: var(--font-weight-semibold);
+}
+
+h4 {
+	font-size: var(--font-header-lg);
+	font-weight: var(--font-weight-semibold);
+}
+
+h5 {
+	font-size: var(--font-header-md);
+	font-weight: var(--font-weight-medium);
+}
+
+h6 {
+	font-size: var(--font-header-sm);
+	font-weight: var(--font-weight-medium);
+}
+
+.text-xs {
+	font-size: var(--font-text-xs);
+}
+
+.text-sm {
+	font-size: var(--font-text-sm);
+}
+
+.text-md {
+	font-size: var(--font-text-md);
+}
+
+.text-lg {
+	font-size: var(--font-text-lg);
+}
+
+.font-normal {
+	font-weight: var(--font-weight-normal);
+}
+
+.font-medium {
+	font-weight: var(--font-weight-medium);
+}
+
+.font-semibold {
+	font-weight: var(--font-weight-semibold);
+}
+
+.font-bold {
+	font-weight: var(--font-weight-bold);
+}
+
+.text-primary {
+	color: var(--color-text-primary);
+}
+
+.text-secondary {
+	color: var(--color-text-secondary);
+}
+
+.text-tertiary {
+	color: var(--color-text-tertiary);
+}
+
+.text-ghost {
+	color: var(--color-text-ghost);
+}
+
+.text-info {
+	color: var(--color-text-info);
+}
+
+.text-danger {
+	color: var(--color-text-danger);
+}
+
+.text-success {
+	color: var(--color-text-success);
+}
+
+.text-warning {
+	color: var(--color-text-warning);
+}
+
+.text-disabled {
+	color: var(--color-text-disabled);
+}
+
+/*
+=========================
+4. Layout Primitives
+=========================
+*/
+
+/* App shell: sidebar + main content. Used once, wrapping every page. */
+.app-shell {
+	display: flex;
+	min-height: 100vh;
+	background-color: var(--color-background-primary);
+}
+
+.sidebar {
+	flex-shrink: 0;
+	width: 240px;
+	padding: var(--space-md);
+	background-color: var(--color-background-secondary);
+	border-right: var(--border-width-regular) solid var(--color-border-primary);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+}
+
+.main-content {
+	flex: 1;
+	padding: var(--space-lg);
+	overflow-y: auto;
+}
+
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-inline: var(--space-lg);
+}
+
+/* Vertical rhythm. Default gap is --space-md; override with a modifier. */
+.stack {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+}
+
+.stack-xs {
+	gap: var(--space-xs);
+}
+
+.stack-sm {
+	gap: var(--space-sm);
+}
+
+.stack-lg {
+	gap: var(--space-lg);
+}
+
+.stack-xl {
+	gap: var(--space-xl);
+}
+
+/* Horizontal rhythm. */
+.row {
+	display: flex;
+	align-items: center;
+	gap: var(--space-md);
+}
+
+.row-xs {
+	gap: var(--space-xs);
+}
+
+.row-sm {
+	gap: var(--space-sm);
+}
+
+.row-lg {
+	gap: var(--space-lg);
+}
+
+.row-wrap {
+	flex-wrap: wrap;
+}
+
+.row-between {
+	justify-content: space-between;
+}
+
+.row-end {
+	justify-content: flex-end;
+}
+
+/*
+=========================
+5. Utilities
+=========================
+*/
+
+.flex {
+	display: flex;
+}
+
+/* --- Desktop scrollbar styling --- */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-background-primary);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-background-tertiary);
+	border-radius: var(--border-radius-full);
+	border: var(--border-width-regular) solid var(--color-border-tertiary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-text-tertiary);
+}
+
+/* --- Focus-visible --- */
+:focus-visible {
+	outline: 2px solid var(--color-ring-info);
+	outline-offset: 2px;
+	border-radius: var(--border-radius-xs);
+}
