@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="frontend/styles/main.css" />
+    <link rel="stylesheet" href="frontend/styles/components.css" />
     
-    <script type="module" src="/main.js" defer></script>
+    <script type="module" src="frontend/main.js" defer></script>
 </head>
 <body>
     <nav>
@@ -30,7 +30,7 @@
             <h4>Docket</h4>
         </div>
         <div class="nav-segment">
-            <button class="nav-segment-item is-active">
+            <a class="nav-segment-item is-active">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-layout-dashboard">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
@@ -67,7 +67,7 @@
             </a>
         </div>
         <div class="nav-side">
-            <a class="nav-icon-btn" aria-label="Settings" href="settings.html">
+            <a class="nav-icon-btn" aria-label="Settings">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065" />
@@ -76,8 +76,6 @@
             </a>
         </div>
     </nav>
-
-
 
     <main class="container">    
         <div class="card" data-size="xl">
