@@ -3,3 +3,7 @@
 *.sqlite3
 
 /backend/__pycache__
+.venv/
+venv/
+env/
+ENV/
