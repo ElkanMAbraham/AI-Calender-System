@@ -1,0 +1,568 @@
+/* ================================================
+   onboarding.css
+   Page-specific layout, transitions, components.
+   All colour/spacing/type tokens come from main.css.
+   ================================================ */
+
+/* ── Logo mark ── */
+.logo-mark {
+    width: 28px;
+    height: 28px;
+    background-color: var(--color-background-info);
+    border: 1px solid var(--color-border-info);
+    border-radius: var(--border-radius-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ── Sidebar step nav ── */
+#step-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    /* Override global nav styles from components.css */
+    background-color: transparent;
+    padding: 0;
+    border-bottom: none;
+    justify-content: flex-start;
+}
+
+.step-nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 7px var(--space-sm);
+    border-radius: var(--border-radius-xs);
+    transition: background-color 0.15s;
+}
+
+.step-nav-item.is-active {
+    background-color: var(--color-background-tertiary);
+}
+
+.step-nav-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.step-nav-dot.is-done {
+    border-color: var(--color-border-success);
+    background-color: var(--color-background-success);
+}
+
+.step-nav-dot.is-active {
+    border-color: var(--color-border-info);
+    background-color: var(--color-background-info);
+}
+
+.step-nav-dot-inner {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--color-text-info);
+}
+
+.step-nav-label {
+    font-size: var(--font-text-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-ghost);
+    transition: color 0.15s;
+}
+
+.step-nav-item.is-active .step-nav-label {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.step-nav-item.is-done .step-nav-label {
+    color: var(--color-text-secondary);
+}
+
+/* ── Progress pips ── */
+.pip-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pip {
+    height: 3px;
+    border-radius: 99px;
+    background-color: var(--color-border-primary);
+    transition: all 0.35s ease;
+    width: 8px;
+}
+
+.pip.is-done {
+    width: 12px;
+    background-color: var(--color-border-success);
+}
+
+.pip.is-active {
+    width: 20px;
+    background-color: var(--color-text-info);
+}
+
+/* ── Main layout ── */
+.onboarding-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.onboarding-frame {
+    width: 100%;
+    max-width: 520px;
+}
+
+/* ── Step viewport & transitions ── */
+.step-viewport {
+    position: relative;
+    min-height: 320px;
+}
+
+.step {
+    display: none;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.step.is-visible {
+    display: block;
+}
+
+.step.is-entering {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step.is-exiting {
+    opacity: 0;
+    transform: translateY(-12px);
+}
+
+/* ── Step heading ── */
+.step-heading {
+    margin-bottom: var(--space-xl);
+}
+
+.step-heading h2 {
+    margin-bottom: var(--space-xs);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+/* ── Field styles ── */
+.field-label {
+    display: block;
+    font-size: var(--font-text-xs);
+    color: var(--color-text-ghost);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.field-input {
+    width: 100%;
+    background-color: var(--color-background-tertiary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--border-radius-xs);
+    padding: 10px var(--space-md);
+    color: var(--color-text-primary);
+    font-size: var(--font-text-md);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.field-input:focus {
+    border-color: var(--color-border-info);
+}
+
+.field-input::placeholder {
+    color: var(--color-text-ghost);
+}
+
+/* ── Tile grid (2-col) ── */
+.tile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+/* ── Option tiles ── */
+.option-tile {
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-sm);
+    padding: var(--space-md);
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s, background-color 0.15s;
+    color: var(--color-text-primary);
+    width: 100%;
+}
+
+.option-tile:hover {
+    border-color: var(--color-border-info);
+}
+
+.option-tile.is-selected {
+    background-color: var(--color-background-info);
+    border-color: var(--color-border-info);
+}
+
+/* Row variant */
+.option-tile--row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.tile-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-tertiary);
+}
+
+.option-tile.is-selected .tile-top {
+    color: var(--color-text-info);
+}
+
+.option-tile--row svg {
+    color: var(--color-text-tertiary);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.option-tile--row.is-selected svg {
+    color: var(--color-text-info);
+}
+
+.tile-label {
+    font-size: var(--font-text-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.tile-desc {
+    font-size: var(--font-text-xs);
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+}
+
+/* ── Badges ── */
+.badge {
+    font-size: var(--font-text-xs);
+    padding: 1px 6px;
+    border-radius: var(--border-radius-xs);
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-medium);
+}
+
+.badge--success {
+    color: var(--color-text-success);
+    background-color: var(--color-background-success);
+    border: 1px solid var(--color-border-success);
+}
+
+.badge--info {
+    color: var(--color-text-info);
+    background-color: var(--color-background-info);
+    border: 1px solid var(--color-border-info);
+}
+
+.badge--warning {
+    color: var(--color-text-warning);
+    background-color: var(--color-background-warning);
+    border: 1px solid var(--color-border-warning);
+}
+
+/* ── Task add row ── */
+.task-add-row {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: var(--color-background-info);
+    border: 1px solid var(--color-border-info);
+    border-radius: var(--border-radius-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text-info);
+    transition: opacity 0.15s;
+}
+
+.btn-icon:hover {
+    opacity: 0.85;
+}
+
+/* ── Task list ── */
+.task-list {
+    padding: 0;
+    list-style: none;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-xs);
+    padding: var(--space-xs) var(--space-md);
+    animation: slideIn 0.18s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item-name {
+    flex: 1;
+    font-size: var(--font-text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+}
+
+.task-item-hours {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-text-xs);
+    color: var(--color-text-secondary);
+}
+
+.task-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-ghost);
+    padding: 2px;
+    line-height: 0;
+    transition: color 0.15s;
+}
+
+.task-remove:hover {
+    color: var(--color-text-danger);
+}
+
+.task-empty {
+    font-size: var(--font-text-sm);
+    color: var(--color-text-ghost);
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+/* ── JSON preview ── */
+.json-preview {
+    background-color: var(--color-background-ghost);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-xs);
+    padding: var(--space-sm);
+    font-size: var(--font-text-xs);
+    color: var(--color-text-secondary);
+    overflow-x: auto;
+    margin: 0;
+    line-height: 1.6;
+    font-family: monospace;
+}
+
+/* ── Review table ── */
+.review-table {
+    overflow: hidden;
+}
+
+.review-row {
+    display: flex;
+    gap: var(--space-lg);
+    padding: 10px var(--space-md);
+    border-top: 1px solid var(--color-border-tertiary);
+    align-items: flex-start;
+}
+
+.review-row:first-child {
+    border-top: none;
+}
+
+.review-col {
+    font-size: var(--font-text-xs);
+    color: var(--color-text-info);
+    flex-shrink: 0;
+    width: 130px;
+    padding-top: 1px;
+    font-family: monospace;
+}
+
+.review-val {
+    font-size: var(--font-text-sm);
+    color: var(--color-text-primary);
+    word-break: break-all;
+    flex: 1;
+}
+
+.review-val.is-empty {
+    color: var(--color-text-ghost);
+}
+
+/* ── CTA buttons ── */
+.btn-primary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background-color: var(--color-background-info);
+    border: 1px solid var(--color-border-info);
+    color: var(--color-text-info);
+    border-radius: var(--border-radius-xs);
+    padding: 10px var(--space-lg);
+    font-size: var(--font-text-md);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.btn-primary:hover {
+    opacity: 0.85;
+}
+
+.btn-primary:disabled {
+    background-color: var(--color-background-ghost);
+    border-color: var(--color-border-tertiary);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-text-sm);
+    color: var(--color-text-tertiary);
+    padding: var(--space-xs) 0;
+    transition: color 0.15s;
+}
+
+.btn-back:hover {
+    color: var(--color-text-primary);
+}
+
+.btn-back.is-hidden {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ── Error banner ── */
+.error-banner {
+    margin-top: var(--space-md);
+    background-color: var(--color-background-danger);
+    border: 1px solid var(--color-border-danger);
+    border-radius: var(--border-radius-xs);
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-text-sm);
+    color: var(--color-text-danger);
+}
+
+/* ── Launch overlay ── */
+.launch-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-background-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-overlay);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.launch-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.launch-content {
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+}
+
+.launch-check {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--color-background-success);
+    border: 1px solid var(--color-border-success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-xl);
+    transform: scale(0);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.launch-overlay.is-visible .launch-check {
+    transform: scale(1);
+}
+
+.progress-track {
+    height: 3px;
+    border-radius: 99px;
+    background-color: var(--color-background-tertiary);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--color-text-success);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 2s linear;
+}
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+    .sidebar {
+        display: none;
+    }
+
+    .tile-grid {
+        grid-template-columns: 1fr;
+    }
+}

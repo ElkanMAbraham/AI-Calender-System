@@ -1,9 +1,9 @@
 import sqlite3
 import json
 from datetime import datetime
+import os
 
-DB_PATH = "docket.db"
-
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docket.db")
 
 def get_conn():
     conn = sqlite3.connect(DB_PATH)
@@ -22,21 +22,21 @@ def init_db():
     # The ai_context column is a JSON blob the AI can read to understand
     # the user's habits before making any estimates.
     # -----------------------------------------------------------------
-    # c.execute("""
-    #     CREATE TABLE IF NOT EXISTS user_profile (
-    #         id              INTEGER PRIMARY KEY CHECK (id = 1),  -- only one row ever
-    #         name            TEXT,
-    #         primary_use     TEXT,   -- 'work', 'study', 'personal', 'mix'
-    #         ai_provider     TEXT DEFAULT 'claude',  -- 'claude', 'ollama', 'openai'
-    #         ai_api_key      TEXT,   -- stored locally, never transmitted
-    #         autonomy_level  TEXT DEFAULT 'notify',  -- 'ask', 'notify', 'autonomous'        --check 'AI summer project DOC for for information'
-    #         -- JSON blob: {"frequent_tasks": [{"name": "essay", "avg_hours": 3}]}
-    #         -- AI reads this at startup to seed its estimates
-    #         ai_context      TEXT DEFAULT '{}', -- information from onboarding
-    #         created_at      TEXT DEFAULT (datetime('now')),
-    #         updated_at      TEXT DEFAULT (datetime('now'))
-    #     )
-    # """)
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS user_profile (
+            id              INTEGER PRIMARY KEY CHECK (id = 1),  -- only one row ever
+            name            TEXT,
+            primary_use     TEXT,   -- 'work', 'study', 'personal', 'mix'
+            ai_provider     TEXT DEFAULT 'claude',  -- 'claude', 'ollama', 'openai'
+            ai_api_key      TEXT,   -- stored locally, never transmitted
+            autonomy_level  TEXT DEFAULT 'notify',  -- 'ask', 'notify', 'autonomous'        --check 'AI summer project DOC for for information'
+            -- JSON blob: {"frequent_tasks": [{"name": "essay", "avg_hours": 3}]}
+            -- AI reads this at startup to seed its estimates
+            ai_context      TEXT DEFAULT '{}', -- information from onboarding
+            created_at      TEXT DEFAULT (datetime('now')),
+            updated_at      TEXT DEFAULT (datetime('now'))
+        )
+    """)
 
     # -----------------------------------------------------------------
     # TASKS
