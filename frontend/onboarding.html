@@ -72,7 +72,7 @@
           <section class="step" id="step-1">
             <div class="step-heading">
               <h2>What should we call you?</h2>
-              <p class="text-md" style="color:var(--color-text-secondary);">Stored as <code>name</code>. Used to personalise responses.</p>
+              <p class="text-md" style="color:var(--color-text-secondary);">Used to personalise responses.</p>
             </div>
             <label class="field-label" for="input-name">Full name</label>
             <input class="field-input" id="input-name" type="text" placeholder="e.g. Jordan" autocomplete="off" />
@@ -82,7 +82,7 @@
           <section class="step" id="step-2">
             <div class="step-heading">
               <h2>How will you primarily use this?</h2>
-              <p class="text-md" style="color:var(--color-text-secondary);">Stored as <code>primary_use</code>. Sets tone and defaults.</p>
+              <p class="text-md" style="color:var(--color-text-secondary);"> Sets tone and defaults.</p>
             </div>
             <div class="tile-grid" id="primary-use-tiles">
               <button class="option-tile" data-group="primary_use" data-value="work">
@@ -120,7 +120,7 @@
           <section class="step" id="step-3">
             <div class="step-heading">
               <h2>Which AI provider?</h2>
-              <p class="text-md" style="color:var(--color-text-secondary);">Stored as <code>ai_provider</code>. Ollama runs fully offline.</p>
+              <p class="text-md" style="color:var(--color-text-secondary);"> Ollama runs fully offline.</p>
             </div>
             <div class="stack stack-sm">
               <button class="option-tile option-tile--row" data-group="ai_provider" data-value="claude">
@@ -152,7 +152,7 @@
           <section class="step" id="step-4">
             <div class="step-heading">
               <h2>How much autonomy should the AI have?</h2>
-              <p class="text-md" style="color:var(--color-text-secondary);">Stored as <code>autonomy_level</code>. Changeable any time in Settings.</p>
+              <p class="text-md" style="color:var(--color-text-secondary);"> Changeable any time in Settings.</p>
             </div>
             <div class="stack stack-sm">
               <button class="option-tile option-tile--row" data-group="autonomy_level" data-value="ask">
@@ -179,36 +179,9 @@
             </div>
           </section>
 
-          <!-- Step 5: Frequent tasks -->
-          <section class="step" id="step-5">
-            <div class="step-heading">
-              <h2>What tasks do you do most?</h2>
-              <p class="text-md" style="color:var(--color-text-secondary);">
-                Stored as <code>ai_context</code>. AI reads this at startup to seed time estimates. Optional.
-              </p>
-            </div>
-            <div class="task-add-row">
-              <div style="flex:1;">
-                <label class="field-label" for="task-name-input">Task name</label>
-                <input class="field-input" id="task-name-input" type="text" placeholder="e.g. Essay draft" />
-              </div>
-              <div style="width:100px;">
-                <label class="field-label" for="task-hours-input">Avg hours</label>
-                <input class="field-input" id="task-hours-input" type="number" min="0.25" step="0.25" placeholder="3" />
-              </div>
-              <button class="btn-icon" id="add-task-btn" aria-label="Add task">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-              </button>
-            </div>
-            <ul class="task-list stack stack-xs" id="task-list"></ul>
-            <div id="task-json-preview" style="display:none;margin-top:var(--space-md);">
-              <p class="field-label">Preview — stored as <code>ai_context</code></p>
-              <pre class="json-preview" id="task-json-code"></pre>
-            </div>
-          </section>
 
-          <!-- Step 6: Review -->
-          <section class="step" id="step-6">
+          <!-- Step 5: Review -->
+          <section class="step" id="step-5">
             <div class="step-heading">
               <h2>Review your setup</h2>
               <p class="text-md" style="color:var(--color-text-secondary);">Exactly what will be written to your local database.</p>

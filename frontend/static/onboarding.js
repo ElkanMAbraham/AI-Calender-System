@@ -4,7 +4,7 @@
     /* ─────────────────────────────────────────
        State
     ───────────────────────────────────────── */
-    const STEP_LABELS = ['Welcome', 'Your name', 'Primary use', 'AI provider', 'Autonomy', 'Your tasks', 'Review'];
+    const STEP_LABELS = ['Welcome', 'Your name', 'Primary use', 'AI provider', 'Autonomy', 'Review'];
     const TOTAL_STEPS = STEP_LABELS.length;
 
     const state = {
@@ -13,7 +13,6 @@
         primary_use: '',
         ai_provider: '',
         autonomy_level: '',
-        frequent_tasks: [],   // [{ name: string, avg_hours: number }]
     };
 
     /* ─────────────────────────────────────────
@@ -24,12 +23,6 @@
     const stepCounter = document.getElementById('step-counter');
     const btnNext = document.getElementById('btn-next');
     const btnBack = document.getElementById('btn-back');
-    const taskNameIn = document.getElementById('task-name-input');
-    const taskHoursIn = document.getElementById('task-hours-input');
-    const addTaskBtn = document.getElementById('add-task-btn');
-    const taskList = document.getElementById('task-list');
-    const jsonPreview = document.getElementById('task-json-preview');
-    const jsonCode = document.getElementById('task-json-code');
     const reviewTable = document.getElementById('review-table');
     const errorBanner = document.getElementById('submit-error');
     const launchOverlay = document.getElementById('launch-overlay');
@@ -126,11 +119,10 @@
             updateNav();
             updateButtons();
 
-            if (next === 6) buildReview();
+            if (next === TOTAL_STEPS - 1) buildReview();
 
             // Auto-focus inputs
             if (next === 1) inputName.focus();
-            if (next === 5) taskNameIn.focus();
         }, 220);
     }
 
@@ -179,68 +171,6 @@
         });
     }
 
-    /* ─────────────────────────────────────────
-       Task list
-    ───────────────────────────────────────── */
-    function addTask() {
-        const name = taskNameIn.value.trim();
-        const hours = parseFloat(taskHoursIn.value);
-        if (!name || isNaN(hours) || hours <= 0) return;
-
-        state.frequent_tasks.push({ name, avg_hours: hours });
-        taskNameIn.value = '';
-        taskHoursIn.value = '';
-        taskNameIn.focus();
-
-        renderTaskList();
-    }
-
-    function removeTask(index) {
-        state.frequent_tasks.splice(index, 1);
-        renderTaskList();
-    }
-
-    function renderTaskList() {
-        taskList.innerHTML = '';
-
-        if (state.frequent_tasks.length === 0) {
-            const empty = document.createElement('p');
-            empty.className = 'task-empty';
-            empty.textContent = 'No tasks added yet — add some above, or skip this step.';
-            taskList.appendChild(empty);
-            jsonPreview.style.display = 'none';
-            return;
-        }
-
-        state.frequent_tasks.forEach((task, i) => {
-            const li = document.createElement('li');
-            li.className = 'task-item';
-
-            li.innerHTML = `
-        <span class="task-item-name">${task.name}</span>
-        <span class="task-item-hours">
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-            <circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M5.5 3v2.5l1.5 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-          ${task.avg_hours}h avg
-        </span>
-        <button class="task-remove" aria-label="Remove task" data-index="${i}">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path d="M3 3l7 7M10 3l-7 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-          </svg>
-        </button>
-      `;
-            taskList.appendChild(li);
-        });
-
-        taskList.querySelectorAll('.task-remove').forEach(btn => {
-            btn.addEventListener('click', () => removeTask(parseInt(btn.dataset.index)));
-        });
-
-        jsonPreview.style.display = 'block';
-        jsonCode.textContent = JSON.stringify({ frequent_tasks: state.frequent_tasks }, null, 2);
-    }
 
     /* ─────────────────────────────────────────
        Review table
@@ -252,7 +182,6 @@
             { col: 'ai_provider', val: state.ai_provider },
             { col: 'ai_api_key', val: '(not collected — set in Settings)' },
             { col: 'autonomy_level', val: state.autonomy_level },
-            { col: 'ai_context', val: JSON.stringify({ frequent_tasks: state.frequent_tasks }) },
         ];
 
         reviewTable.innerHTML = '';
@@ -286,24 +215,20 @@
             name: state.name,
             primary_use: state.primary_use,
             ai_provider: state.ai_provider,
-            // ai_api_key intentionally omitted — user adds this later in Settings
             autonomy_level: state.autonomy_level,
-            ai_context: JSON.stringify({ frequent_tasks: state.frequent_tasks }),
         };
 
         try {
-            // ----------------------------------------------------------------
             // Calls Api.save_onboarding(payload) in backend/api.py via
-            // pywebview's js_api bridge — no HTTP request, no Flask needed.
-            // Returns { ok: true } on success or { ok: false, error: "..." }.
-            // ----------------------------------------------------------------
-            const result = await window.pywebview.api.save_onboarding(payload);
+            const result = await window.pywebview.api.saveOnboarding(payload);
 
             if (!result.ok) {
                 throw new Error(result.error ?? 'Unknown error from Python.');
             }
 
             showLaunch();
+
+            window.location.href = "index.html";
 
         } catch (err) {
             errorBanner.textContent = `Failed to save: ${err.message}`;
@@ -327,17 +252,8 @@
     }
 
     /* ─────────────────────────────────────────
-       Event listeners
+    Event listeners
     ───────────────────────────────────────── */
-    btnNext.addEventListener('click', () => {
-        if (!canContinue()) return;
-        if (state.step === TOTAL_STEPS - 1) {
-            submitAndLaunch();
-        } else {
-            goToStep(state.step + 1);
-        }
-    });
-
     btnBack.addEventListener('click', () => {
         if (state.step > 0) goToStep(state.step - 1);
     });
@@ -351,14 +267,16 @@
         if (e.key === 'Enter' && canContinue()) goToStep(state.step + 1);
     });
 
-    addTaskBtn.addEventListener('click', addTask);
-
-    taskNameIn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') addTask();
-    });
-
-    taskHoursIn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') addTask();
+    // Wait for pywebview bridge before allowing submission
+    window.addEventListener('pywebviewready', function () {
+        btnNext.addEventListener('click', () => {
+            if (!canContinue()) return;
+            if (state.step === TOTAL_STEPS - 1) {
+                submitAndLaunch();
+            } else {
+                goToStep(state.step + 1);
+            }
+        });
     });
 
     /* ─────────────────────────────────────────
@@ -366,7 +284,6 @@
     ───────────────────────────────────────── */
     buildNav();
     bindTiles();
-    renderTaskList();
 
     // Show first step
     const firstStep = document.getElementById('step-0');

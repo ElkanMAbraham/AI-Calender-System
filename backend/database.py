@@ -1,9 +1,9 @@
 import sqlite3
 import json
 from datetime import datetime
+import os
 
-DB_PATH = "docket.db"
-
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docket.db")
 
 def get_conn():
     conn = sqlite3.connect(DB_PATH)
