@@ -1,7 +1,6 @@
 /* ================================================
    onboarding.css
    Page-specific layout, transitions, components.
-   All colour/spacing/type tokens come from main.css.
    ================================================ */
 
 /* ── Logo mark ── */
@@ -193,107 +192,6 @@
     color: var(--color-text-ghost);
 }
 
-/* ── Tile grid (2-col) ── */
-.tile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-sm);
-}
-
-/* ── Option tiles ── */
-.option-tile {
-    background-color: var(--color-background-secondary);
-    border: 1px solid var(--color-border-secondary);
-    border-radius: var(--border-radius-sm);
-    padding: var(--space-md);
-    text-align: left;
-    cursor: pointer;
-    box-shadow: var(--shadow-sm);
-    transition: border-color 0.15s, background-color 0.15s;
-    color: var(--color-text-primary);
-    width: 100%;
-}
-
-.option-tile:hover {
-    border-color: var(--color-border-info);
-}
-
-.option-tile.is-selected {
-    background-color: var(--color-background-info);
-    border-color: var(--color-border-info);
-}
-
-/* Row variant */
-.option-tile--row {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-}
-
-.tile-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-xs);
-    color: var(--color-text-tertiary);
-}
-
-.option-tile.is-selected .tile-top {
-    color: var(--color-text-info);
-}
-
-.option-tile--row svg {
-    color: var(--color-text-tertiary);
-    flex-shrink: 0;
-    margin-top: 2px;
-}
-
-.option-tile--row.is-selected svg {
-    color: var(--color-text-info);
-}
-
-.tile-label {
-    font-size: var(--font-text-md);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-primary);
-    margin-bottom: 3px;
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-}
-
-.tile-desc {
-    font-size: var(--font-text-xs);
-    color: var(--color-text-tertiary);
-    line-height: 1.5;
-}
-
-/* ── Badges ── */
-.badge {
-    font-size: var(--font-text-xs);
-    padding: 1px 6px;
-    border-radius: var(--border-radius-xs);
-    letter-spacing: 0.05em;
-    font-weight: var(--font-weight-medium);
-}
-
-.badge--success {
-    color: var(--color-text-success);
-    background-color: var(--color-background-success);
-    border: 1px solid var(--color-border-success);
-}
-
-.badge--info {
-    color: var(--color-text-info);
-    background-color: var(--color-background-info);
-    border: 1px solid var(--color-border-info);
-}
-
-.badge--warning {
-    color: var(--color-text-warning);
-    background-color: var(--color-background-warning);
-    border: 1px solid var(--color-border-warning);
-}
-
 /* ── Task add row ── */
 .task-add-row {
     display: flex;
@@ -407,7 +305,7 @@
 
 .review-row {
     display: flex;
-    gap: var(--space-lg);
+    justify-content: space-between;
     padding: 10px var(--space-md);
     border-top: 1px solid var(--color-border-tertiary);
     align-items: flex-start;
@@ -565,4 +463,18 @@
     .tile-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ── Native password reveal ── */
+#input-api-key::-ms-reveal,
+#input-api-key::-ms-clear,
+#key-add-input::-ms-reveal,
+#key-add-input::-ms-clear {
+    display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    -webkit-appearance: none;
+    visibility: hidden;
+    display: none;
 }

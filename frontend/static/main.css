@@ -28,6 +28,7 @@
 
 	/* ---------- Background / Accent ---------- */
 	--color-background-info: #1e3043;
+	--color-background-info-strong: #16334f;
 	--color-background-danger: #461e1b;
 	--color-background-success: #1b3b27;
 	--color-background-warning: #413116;

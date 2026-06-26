@@ -27,7 +27,7 @@ def init_db():
             id              INTEGER PRIMARY KEY CHECK (id = 1),  -- only one row ever
             name            TEXT,
             primary_use     TEXT,   -- 'work', 'study', 'personal', 'mix'
-            ai_provider     TEXT DEFAULT 'claude',  -- 'claude', 'ollama', 'openai'
+            ai_provider     TEXT DEFAULT 'anthropic',  -- 'anthropic', 'openai', 'ollama'
             ai_api_key      TEXT,   -- stored locally, never transmitted
             autonomy_level  TEXT DEFAULT 'notify',  -- 'ask', 'notify', 'autonomous'        --check 'AI summer project DOC for for information'
             -- JSON blob: {"frequent_tasks": [{"name": "essay", "avg_hours": 3}]}

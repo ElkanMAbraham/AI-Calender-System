@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="static/components.css">
 </head>
 <body>
+    <!-- Navbar -->
     <nav>
         <a class="nav-brand" href="#/">
             <span class="nav-brand-mark">
@@ -70,10 +71,109 @@
             </a>
         </div>
     </nav>
+    
+    <!-- Body -->
     <main id="app"></main>
-    <dialog id="settings-modal">
-        <!-- TODO: implement settings UI -->
+
+    <!-- Settings Modal -->
+    <dialog id="settings-modal" class="modal-dialog">
+        <div class="modal modal--single-col">
+            <header class="modal-header">
+                <button class="modal-close" type="button" data-action="close-settings" aria-label="Close settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6L6 18" />
+                        <path d="M6 6l12 12" />
+                    </svg>
+                </button>
+            </header>
+            <form class="modal-main" data-form="settings">
+                <section class="modal-section" id="account">
+                    <!-- ===== Profile ===== -->
+                    <div class="modal-group">
+                        <h3 class="modal-group-title">Profile</h3>
+                        <!-- Full name — label takes left half, input takes right half -->
+                        <div class="field field--horizontal" data-field="name">
+                            <label class="field-label" for="account-name" style="font-size: var(--font-text-sm);">What should we call you by?</label>
+                            <input id="account-name" type="text" data-input="primary" placeholder="Your Name" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <hr class="modal-divider" />
+
+                    <!-- ===== App Context ===== -->
+                    <div class="modal-group">
+                        <h3 class="modal-group-title">App Preferences</h3>
+
+                        <!-- Primary use tiles -->
+                        <div class="field" data-field="primary_use">
+                            <label class="field-label">Primary use</label>
+                            <div class="tile-grid" id="primary-use-tiles"></div>
+                            <span class="field-helper" data-field-helper></span>
+                        </div>
+
+                        <!-- Primary use context -->
+                        <div class="field" data-field="primary_use_context">
+                            <label class="field-label" for="primary-use-context">Tell us more <span style="color:var(--color-text-tertiary);font-weight:var(--font-weight-normal);">(optional)</span></label>
+                            <textarea id="primary-use-context" data-input="primary" placeholder="e.g. Final-year CS student focused on ML coursework and a part-time internship." maxlength="500"></textarea>
+                            <span class="field-helper" data-field-helper>Helps the AI tailor suggestions. Stored locally — never shared.</span>
+                        </div>
+
+                        <!-- Autonomy tiles -->
+                        <div class="field" data-field="autonomy_level">
+                            <label class="field-label">Autonomy</label>
+                            <div class="stack stack-sm" id="autonomy-tiles"></div>
+                            <span class="field-helper" data-field-helper>How independently the AI can act on your tasks.</span>
+                        </div>
+                    </div>
+
+                    <hr class="modal-divider" />
+
+                    <!-- ===== AI Preferences ===== -->
+                    <div class="modal-group">
+                        <h3 class="modal-group-title">AI Preferences</h3>
+
+                        <!-- AI provider -->
+                        <div class="field" data-field="ai_provider">
+                            <label class="field-label">AI provider</label>
+                            <div class="stack stack-sm" id="ai-provider-tiles"></div>
+                            <span class="field-helper" data-field-helper>Only the selected provider is used for AI calls.</span>
+                        </div>
+
+                        <!-- Default model -->
+                        <div class="field" data-field="default_model">
+                            <label class="field-label" for="default-model">Default model</label>
+                            <select id="default-model" data-input="primary" data-field="default_model" disabled>
+                                <option value="">Choose a provider first</option>
+                            </select>
+                            <span class="field-helper" data-field-helper>Model options change with the selected provider.</span>
+                        </div>
+
+                        <!-- API keys -->
+                        <div class="field" data-field="api_keys">
+                            <label class="field-label">API keys</label>
+                            <div class="key-cards" id="key-cards" aria-live="polite">
+                                <!-- Rendered by app.js -->
+                            </div>
+                            <div class="key-add-row" id="key-add-row">
+                                <input id="key-add-input" type="password" data-input="primary" placeholder="Paste a key for the selected provider" autocomplete="off" disabled />
+                                <button id="key-add-btn" type="button" data-btn="primary" data-size="sm" disabled>Add key</button>
+                            </div>
+                            <span class="field-helper" data-field-helper>Once added, a key can only be deleted — re-add to replace. Stored locally in plain text.</span>
+                        </div>
+                    </div>
+                </section>
+            </form>
+            <footer class="modal-footer">
+                <button type="button" data-btn="ghost" data-action="close-settings">Cancel</button>
+                <button type="submit" data-btn="primary" data-action="save-settings">Save changes</button>
+            </footer>
+        </div>
+
+        <!-- Toast for save success / non-field errors -->
+        <div class="settings-toast" id="settings-toast" role="status" aria-live="polite"></div>
     </dialog>
+
+    <script src="static/tiles.js"></script>
     <script type="module" src="static/app.js"></script>
 </body>
 </html>
