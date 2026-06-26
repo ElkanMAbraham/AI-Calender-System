@@ -990,3 +990,513 @@ Switch (toggle)
 	cursor: not-allowed;
 	opacity: 0.5;
 }
+
+/*
+========================
+
+Modal
+
+========================
+*/
+
+/* ===== Backdrop dim ===== */
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition: 
+        background-color 0.2s ease,
+        backdrop-filter 0.2s ease;
+    will-change: background-color, backdrop-filter;
+}
+
+dialog[open]::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+dialog.modal-dialog.closing::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+@starting-style {
+    dialog[open]::backdrop {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* ===== Dialog shell ===== */
+dialog.modal-dialog {
+    margin: auto;
+    padding: 0;
+    border: var(--border-width-regular) solid var(--color-border-primary);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-lg);
+    max-width: 800px;
+    width: calc(100vw - var(--space-3xl, 64px));
+    max-height: calc(100vh - var(--space-3xl, 64px));
+    position: relative;
+
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+
+    transition:
+        opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    will-change: transform, opacity;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+dialog.modal-dialog[open] {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+dialog.modal-dialog.closing {
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+    pointer-events: none;
+}
+
+@starting-style {
+    dialog.modal-dialog[open] {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+}
+
+
+/* ===== Modal content grid ===== */
+.modal {
+	display: grid;
+	grid-template-columns: 220px 1fr;
+	grid-template-rows: 1fr auto;
+	grid-template-areas:
+		"sidebar main"
+		"sidebar footer";
+	height: min(80vh, 720px);
+	max-height: inherit;
+}
+
+/* Single-column variant — sidebar removed, header/main/footer stack vertically. */
+.modal--single-col {
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		"header"
+		"main"
+		"footer";
+}
+
+/* ===== Main pane ===== */
+.modal-main {
+	grid-area: main;
+	overflow-y: auto;
+	padding: var(--space-xl) var(--space-2xl);
+}
+
+.modal-section {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	padding-bottom: var(--space-2xl);
+	scroll-margin-top: var(--space-md);
+}
+
+.modal-section:last-child {
+	padding-bottom: var(--space-md);
+}
+
+/* ===== Modal groups (sections within the modal-section) ===== */
+.modal-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+}
+
+.modal-group-title {
+	margin: 0;
+	font-size: var(--font-text-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-tertiary);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+.modal-divider {
+	margin: var(--space-md) 0;
+	border: 0;
+	border-top: var(--border-width-regular) solid var(--color-border-primary);
+	background: transparent;
+	height: 0;
+}
+
+/* ===== Header ===== */
+.modal-header {
+	grid-area: header;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: var(--space-sm) var(--space-md);
+	border-bottom: var(--border-width-regular) solid var(--color-border-primary);
+	background-color: var(--color-background-secondary);
+	border-top-left-radius: var(--border-radius-lg);
+	border-top-right-radius: var(--border-radius-lg);
+}
+
+/* ===== Close button ===== */
+.modal-close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: var(--border-width-regular) solid transparent;
+	border-radius: var(--border-radius-sm);
+	background-color: transparent;
+	color: var(--color-text-tertiary);
+	cursor: pointer;
+	transition:
+		background-color var(--speed-base) ease,
+		color var(--speed-base) ease,
+		border-color var(--speed-base) ease;
+}
+
+/* ===== Footer ===== */
+.modal-footer {
+	grid-area: footer;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: var(--space-sm);
+	padding: var(--space-md) var(--space-md) var(--space-md) var(--space-2xl);
+	border-top: var(--border-width-regular) solid var(--color-border-primary);
+	background-color: var(--color-background-secondary);
+	border-bottom-right-radius: var(--border-radius-lg);
+}
+
+.modal-close:hover {
+	background-color: var(--color-background-ghost);
+	color: var(--color-text-primary);
+	border-color: var(--color-border-primary);
+}
+
+.modal-close:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 2px var(--color-ring-info);
+}
+
+dialog.modal-dialog {
+	position: relative;
+}
+
+/*
+========================
+
+Settings — Option Tiles (primary use)
+
+========================
+*/
+
+.tile-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--space-sm);
+}
+
+.option-tile {
+	background-color: var(--color-background-secondary);
+	border: var(--border-width-regular) solid var(--color-border-secondary);
+	border-radius: var(--border-radius-sm);
+	padding: var(--space-md);
+	text-align: left;
+	cursor: pointer;
+	transition: border-color 0.15s, background-color 0.15s;
+	color: var(--color-text-primary);
+	width: 100%;
+	font-family: inherit;
+	font-size: var(--font-text-md);
+}
+
+.option-tile:hover {
+	border-color: var(--color-border-secondary);
+}
+
+.option-tile.is-selected {
+	background-color: var(--color-background-info);
+	border-color: var(--color-border-info);
+}
+
+/* When a tile is selected the description sits on a blue info surface;
+   the default tertiary colour reads as a red tint against blue. */
+.option-tile.is-selected .tile-desc {
+	color: var(--color-text-info);
+}
+
+/* Row variant — horizontal layout: icon-box left, label/desc stack right. */
+.option-tile--row {
+	display: flex;
+	align-items: center;
+	gap: var(--space-md);
+}
+
+/* Header row inside a grid tile — icon-box left, label right. */
+.tile-header {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+	margin-bottom: var(--space-2xs);
+}
+
+/* Tinted icon-box framing each tile's icon. Adopts the info-tinted
+   surface when its parent tile is selected. */
+.tile-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: var(--border-radius-xs);
+	background-color: var(--color-background-ghost);
+	color: var(--color-text-tertiary);
+	flex-shrink: 0;
+	transition:
+		background-color var(--speed-base) ease,
+		color var(--speed-base) ease;
+}
+
+.tile-icon svg {
+	width: 14px;
+	height: 14px;
+	display: block;
+}
+
+.option-tile.is-selected .tile-icon {
+	background-color: var(--color-background-info-strong);
+	color: var(--color-text-info);
+}
+
+.tile-label {
+	font-size: var(--font-text-md);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+	flex: 1;
+	min-width: 0;
+}
+
+.tile-desc {
+	font-size: var(--font-text-xs);
+	color: var(--color-text-tertiary);
+	line-height: 1.5;
+}
+
+/* In the row variant, drop the header-only spacing so the column owns it. */
+.option-tile--row .tile-label {
+	margin-bottom: 2px;
+}
+
+.option-tile--row .tile-desc {
+	margin-top: 0;
+}
+
+/*
+========================
+
+Shared Badges
+
+========================
+*/
+
+.badge {
+	font-size: var(--font-text-xs);
+	padding: 1px 6px;
+	border-radius: var(--border-radius-xs);
+	letter-spacing: 0.05em;
+	font-weight: var(--font-weight-medium);
+}
+
+.badge--success {
+	color: var(--color-text-success);
+	background-color: var(--color-background-success);
+	border: 1px solid var(--color-border-success);
+}
+
+.badge--info {
+	color: var(--color-text-info);
+	background-color: var(--color-background-info);
+	border: 1px solid var(--color-border-info);
+}
+
+.badge--warning {
+	color: var(--color-text-warning);
+	background-color: var(--color-background-warning);
+	border: 1px solid var(--color-border-warning);
+}
+
+/*
+========================
+
+Settings — API Key Cards
+
+========================
+*/
+
+.key-cards {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+}
+
+.key-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-md);
+	padding: var(--space-sm) var(--space-md);
+	background-color: var(--color-background-tertiary);
+	border: var(--border-width-regular) solid var(--color-border-primary);
+	border-radius: var(--border-radius-md);
+}
+
+.key-card[data-state="active"] {
+	border-color: var(--color-border-info);
+	background-color: var(--color-background-info);
+}
+
+.key-card-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3xs);
+	min-width: 0;
+	flex: 1;
+}
+
+.key-card-provider {
+	font-size: var(--font-text-sm);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+	letter-spacing: 0.01em;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-xs);
+}
+
+.key-card-provider .key-card-active-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: var(--border-radius-full);
+	background-color: var(--color-text-success);
+}
+
+.key-card-value {
+	font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+	font-size: var(--font-text-sm);
+	color: var(--color-text-tertiary);
+	letter-spacing: 0.04em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.key-card-actions {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-xs);
+	flex-shrink: 0;
+}
+
+.key-empty {
+	padding: var(--space-md);
+	border: 1px dashed var(--color-border-primary);
+	border-radius: var(--border-radius-md);
+	color: var(--color-text-tertiary);
+	font-size: var(--font-text-sm);
+	text-align: center;
+}
+
+.key-empty[data-state="offline"] {
+	border-color: var(--color-border-success);
+	color: var(--color-text-success);
+	background-color: var(--color-background-success);
+	border-style: solid;
+}
+
+/*
+========================
+
+Settings — Add Key Inline Row
+
+========================
+*/
+
+.key-add-row {
+	display: flex;
+	gap: var(--space-xs);
+	align-items: stretch;
+	margin-top: var(--space-xs);
+}
+
+.key-add-row [data-input] {
+	flex: 1;
+	min-width: 0;
+}
+
+.key-add-row [data-input]:disabled,
+.key-add-row [data-btn]:disabled {
+	opacity: 0.55;
+}
+
+/*
+========================
+
+Settings — Form Status Banner
+
+========================
+*/
+
+.settings-toast {
+	position: absolute;
+	top: var(--space-md);
+	left: 50%;
+	transform: translate(-50%, -8px);
+	padding: var(--space-xs) var(--space-md);
+	border-radius: var(--border-radius-full);
+	font-size: var(--font-text-sm);
+	font-weight: var(--font-weight-medium);
+	background-color: var(--color-background-success);
+	color: var(--color-text-success);
+	border: var(--border-width-regular) solid var(--color-border-success);
+	opacity: 0;
+	pointer-events: none;
+	transition:
+		opacity 0.25s ease,
+		transform 0.25s ease;
+	z-index: 2;
+	box-shadow: var(--shadow-md);
+}
+
+.settings-toast[data-state="success"].is-visible {
+	opacity: 1;
+	transform: translate(-50%, 0);
+}
+
+.settings-toast[data-state="error"] {
+	background-color: var(--color-background-danger);
+	color: var(--color-text-danger);
+	border-color: var(--color-border-danger);
+	opacity: 1;
+	transform: translate(-50%, 0);
+	pointer-events: auto;
+}
