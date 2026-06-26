@@ -423,7 +423,7 @@
     flex-shrink: 0;
     width: 130px;
     padding-top: 1px;
-    font-family: monospace;
+    font-family: inherit;
 }
 
 .review-val {
