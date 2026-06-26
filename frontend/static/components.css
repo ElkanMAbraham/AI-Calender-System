@@ -657,10 +657,47 @@ Form Layout Primitives
 }
 
 .field-label {
-	font-size: var(--font-text-sm);
-	font-weight: var(--font-weight-semibold);
-	color: var(--color-text-secondary);
-	letter-spacing: 0.01em;
+	display: block;
+	font-size: var(--font-text-xs);
+	color: var(--color-text-ghost);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	margin-bottom: var(--space-xs);
+	font-weight: var(--font-weight-medium);
+}
+
+/* Horizontal variant — label left, input right. Helper text spans full width below. */
+.field--horizontal {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		"label input"
+		"helper helper";
+	column-gap: var(--space-lg);
+	row-gap: var(--space-xs);
+	align-items: center;
+}
+
+.field--horizontal > .field-label {
+	grid-area: label;
+}
+
+.field--horizontal > [data-input] {
+	grid-area: input;
+}
+
+.field--horizontal > .field-helper {
+	grid-area: helper;
+}
+
+@media (max-width: 640px) {
+	.field--horizontal {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"label"
+			"input"
+			"helper";
+	}
 }
 
 .field-label .required {
@@ -684,6 +721,12 @@ Form Layout Primitives
 
 .field-helper[data-state="warning"] {
 	color: var(--color-text-warning);
+}
+
+/* Settings: when a field is in error, also tint its input/tile border. */
+.field[data-field-state="error"] [data-input],
+.field[data-field-state="error"] .tile-grid {
+	border-color: var(--color-border-danger);
 }
 
 .input-affix {

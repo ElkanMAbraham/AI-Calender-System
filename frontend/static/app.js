@@ -1,10 +1,7 @@
 // SPA router for Docket.
-//
-// Hash-based routing (e.g. #/calendar). PyWebView serves index.html
-// from a local HTTP server, but it has no SPA fallback, so a hard
-// refresh on a History API path like /calendar would 404. Hash
-// routing sidesteps this because the server always returns index.html
-// for /, and the hash is client-only.
+// Hash routing (#/calendar) avoids the 404-on-refresh problem that
+// History API paths would hit because the local server only serves
+// index.html for /.
 
 const ROUTES = [
     { path: "/",         view: "home",     title: "Home"     },
@@ -506,7 +503,18 @@ document.addEventListener("click", (event) => {
     if (actionTarget) {
         event.preventDefault();
         const action = actionTarget.dataset.action;
-        if (action === "open-settings") document.getElementById("settings-modal")?.showModal();
+        if (action === "open-settings") {
+            hideToast();
+            hydrateSettingsModal().then(() => {
+                document.getElementById("settings-modal")?.showModal();
+            });
+        }
+        else if (action === "close-settings") {
+            closeModalWithAnimation(document.getElementById("settings-modal"));
+        }
+        else if (action === "save-settings") {
+            saveSettings();
+        }
         else if (action === "retry") navigate(window.location.hash || "#/", { push: false });
         return;
     }
@@ -516,9 +524,30 @@ document.addEventListener("click", (event) => {
     if (href?.startsWith("#/")) {
         event.preventDefault();
         navigate(href);
+        return;
+    }
+    if (href?.startsWith("#") && href.length > 1) {
+        const target = document.querySelector(href);
+        if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
+});
+
+document.getElementById("settings-modal")?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeModalWithAnimation(event.currentTarget);
+});
+
+// Backdrop click closes the modal.
+document.getElementById("settings-modal")?.addEventListener("click", (event) => {
+    if (event.target === event.currentTarget) {
+        closeModalWithAnimation(event.currentTarget);
     }
 });
 
 window.addEventListener("popstate", () => navigate(window.location.hash || "#/", { push: false }));
 
+bindSettingsEvents();
 navigate(window.location.hash || "#/", { push: false });
