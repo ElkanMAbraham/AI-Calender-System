@@ -336,7 +336,8 @@ function buildKeyCard(provider, entry, isActive) {
 
     const value = document.createElement("div");
     value.className = "key-card-value";
-    value.textContent = maskKey(entry.last4);
+    // last4 is derived for display only — never persisted.
+    value.textContent = maskKey((entry.key || "").slice(-4));
     body.appendChild(value);
 
     const actions = document.createElement("div");
@@ -403,11 +404,10 @@ function bindSettingsEvents() {
         const provider = settingsState.ai_provider;
         const value = keyInput?.value?.trim();
         if (!provider || !value) return;
-        const last4 = value.slice(-4);
-        // Optimistic local update — save persists to disk.
+        // Only persist the key itself; the masked display derives last4 on render.
         settingsState.api_keys = {
             ...settingsState.api_keys,
-            [provider]: { key: value, last4 },
+            [provider]: { key: value },
         };
         keyInput.value = "";
         renderKeyCards();

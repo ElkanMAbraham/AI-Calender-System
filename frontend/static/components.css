@@ -1414,7 +1414,7 @@ Settings — API Key Cards
 }
 
 .key-card[data-state="active"] {
-	border-color: var(--button-primary-border);
+	border-color: var(--color-border-info);
 	background-color: var(--color-background-info);
 }
 

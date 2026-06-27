@@ -286,17 +286,27 @@
         btnNext.disabled = true;
         btnNext.textContent = 'Saving…';
 
+        // Reshape into the schema savePreferences() expects:
+        //   - the single key we collected goes under api_keys[ai_provider]
+        //     so the file shape matches the multi-provider design from day 1.
+        //   - context is renamed to primary_use_context.
+        //   - default_model is omitted on first run; the backend keeps the
+        //     existing value (empty) when the key isn't sent.
+        const provider = state.ai_provider;
+        const key = (state.ai_api_key || '').trim();
         const payload = {
             name: state.name,
             primary_use: state.primary_use,
-            ai_provider: state.ai_provider,
-            ai_api_key: state.ai_api_key,
+            primary_use_context: state.ai_context || '',
+            ai_provider: provider,
             autonomy_level: state.autonomy_level,
-            ai_context: state.ai_context,
+            api_keys: provider && key
+                ? { [provider]: { key } }
+                : {},
         };
 
         try {
-            const result = await window.pywebview.api.saveOnboarding(payload);
+            const result = await window.pywebview.api.savePreferences(payload);
 
             if (!result.ok) {
                 throw new Error(result.error ?? 'Unknown error from Python.');

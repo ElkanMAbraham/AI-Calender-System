@@ -17,28 +17,6 @@ def init_db():
     c = conn.cursor()
 
     # -----------------------------------------------------------------
-    # USER PROFILE
-    # Stores onboarding answers and AI provider config.
-    # The ai_context column is a JSON blob the AI can read to understand
-    # the user's habits before making any estimates.
-    # -----------------------------------------------------------------
-    c.execute("""
-        CREATE TABLE IF NOT EXISTS user_profile (
-            id              INTEGER PRIMARY KEY CHECK (id = 1),  -- only one row ever
-            name            TEXT,
-            primary_use     TEXT,   -- 'work', 'study', 'personal', 'mix'
-            ai_provider     TEXT DEFAULT 'anthropic',  -- 'anthropic', 'openai', 'ollama'
-            ai_api_key      TEXT,   -- stored locally, never transmitted
-            autonomy_level  TEXT DEFAULT 'notify',  -- 'ask', 'notify', 'autonomous'        --check 'AI summer project DOC for for information'
-            -- JSON blob: {"frequent_tasks": [{"name": "essay", "avg_hours": 3}]}
-            -- AI reads this at startup to seed its estimates
-            ai_context      TEXT DEFAULT '{}', -- information from onboarding
-            created_at      TEXT DEFAULT (datetime('now')),
-            updated_at      TEXT DEFAULT (datetime('now'))
-        )
-    """)
-
-    # -----------------------------------------------------------------
     # TASKS
     # Core table. AI-relevant columns are:
     #   - ai_estimated_hours: what the AI predicted
@@ -185,8 +163,9 @@ def get_ai_context() -> dict:
     conn = get_conn()
     c = conn.cursor()
 
-    # User profile
-    profile = c.execute("SELECT * FROM user_profile WHERE id = 1").fetchone()
+    # User profile is now stored in the AppData JSON settings file
+    # (see backend/user_profile.py). It isn't joined in here yet —
+    # callers that need it should pull it from the settings file.
 
     # Last 20 completed tasks with actual vs estimated hours
     recent_completed = c.execute("""
@@ -224,7 +203,7 @@ def get_ai_context() -> dict:
     conn.close()
 
     return {
-        "user": dict(profile) if profile else {},
+        "user": {},
         "recent_completed": [dict(r) for r in recent_completed],
         "active_tasks": [dict(t) for t in active_tasks],
         "learned_patterns": [dict(p) for p in patterns],
