@@ -3,3 +3,5 @@ pywebview==5.3
 pillow==12.2.0
 pystray==0.19.5
 six==1.17.0
+pytest==8.3.4
+pytest-cov==5.0.0

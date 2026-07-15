@@ -24,19 +24,25 @@ from datetime import datetime, timezone
 
 def now_iso() -> str:
     """
-    Current UTC time as "YYYY-MM-DDTHH:MM:SS.sssZ".
+    Current UTC time as "YYYY-MM-DDTHH:MM:SS.sssZ" (27 chars).
 
     Matches the schema's strftime('%Y-%m-%dT%H:%M:%fZ', 'now') format
     (truncated to milliseconds) so timestamps sort as strings and
     round-trip cleanly with the rest of the app.
+
+    Implementation note: Python's strftime `%f` directive is
+    platform-dependent — on Linux/macOS it produces a 6-digit
+    microsecond field with a leading dot, but on Windows it omits
+    the dot and is not zero-padded. We build the string manually
+    using strftime for the date/time portion and microsecond arithmetic
+    for the milliseconds, so the output is identical on both platforms.
     """
-    # datetime(...).isoformat() gives "YYYY-MM-DDTHH:MM:SS.ffffff+00:00"
-    # We need millisecond precision and a trailing "Z".
-    return (
-        datetime.now(timezone.utc)
-        .strftime("%Y-%m-%dT%H:%M:%f")[:-3]
-        + "Z"
-    )
+    now = datetime.now(timezone.utc)
+    # strftime %Y/%m/%d/%H/%M/%S are all portable and zero-padded.
+    base = now.strftime("%Y-%m-%dT%H:%M:%S")
+    # microsecond // 1000 gives 0..999 — always exactly 3 digits when formatted.
+    millis = now.microsecond // 1000
+    return f"{base}.{millis:03d}Z"
 
 
 # ========== SQL builders ==========
