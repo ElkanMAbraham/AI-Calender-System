@@ -1,0 +1,15 @@
+# pyproject.toml
+# Project-wide tooling config. Currently only used for pytest discovery.
+#
+# `[tool.pytest.ini_options]` is pytest's own config block. We point it
+# at the tests/ directory at the repo root and set a few sane defaults:
+#   * testpaths = ["tests"]   — pytest looks here by default
+#   * python_files = ["test_*.py"]  — the file pattern pytest discovers
+#   * addopts = "-ra"         — at the end of the run, print a short
+#                                summary of skipped/xfailed tests so
+#                                we don't silently lose coverage.
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra"

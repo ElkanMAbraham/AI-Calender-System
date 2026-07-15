@@ -9,3 +9,8 @@ env/
 ENV/
 /memory
 /backend/database/__pycache__
+/tests/__pycache__
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
